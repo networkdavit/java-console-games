@@ -1,20 +1,29 @@
 import java.util.Scanner;
 import java.util.Random;
+import java.util.ArrayList;
 
 public class SlotGame{
 	private boolean game_started = true;
 	private int money;
+	private String result;
+	ArrayList<String> history = new ArrayList<String>();;
 	Scanner scan = new Scanner(System.in);
 
 	public int start_game(){
 		System.out.println("_____________\n Welcome to SlotGame\n_____________");
 
 		while(true){
-			System.out.println("\nPress 'Y' and hit Enter to spin" + 
+			System.out.println("\nPress 'Y' and hit Enter to spin" + "\nPress 'H' to look at history" + 
 			"\nPress 'X' and hit enter to exit");
 			String spin = scan.next().toLowerCase();
 			if (spin.equals("y")){
 				play();
+				history.add(result);
+			}
+			else if(spin.equals("h")){
+				for(String latest_spin : history) {
+			    	System.out.println(latest_spin);
+			   	}
 			}
 			else if(spin.equals("x")){
 				System.out.println("Final result is " + money);
@@ -35,7 +44,6 @@ public class SlotGame{
 		}
 	}
 
-
 	public void play(){
 		enter_money();
 
@@ -51,7 +59,8 @@ public class SlotGame{
 		    int result2 = nums2[9];
 		    nums3[i] = rand.nextInt(4-1)+1; 
 		    int result3 = nums3[9];
-		    System.out.print(nums1[i] + " " + nums2[i] + " " +  nums3[i] + "\r");
+		    result = nums1[i] + " " + nums2[i] + " " +  nums3[i] + "\r";
+		    System.out.print(result);
 		    try {
 				    Thread.sleep(100);               
 				} catch(InterruptedException ex) {
